@@ -5,6 +5,8 @@ import { Menu, ChevronDown, Shield, Phone } from 'lucide-react';
 import { NAV_LINKS, BRAND } from '../../utils/constants';
 import MobileDrawer from './MobileDrawer';
 import BookingModal from '../consultation/BookingModal';
+import LineHoverLink from '@/components/ui/line-hover-link';
+import AnimatedButton from '@/components/ui/animated-button';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -49,54 +51,33 @@ const Navbar = () => {
         aria-label="Main navigation"
       >
         <div className="max-w-container mx-auto px-4 md:px-8">
-          <div className="flex items-center justify-between h-20 md:h-24">
-            {/* Logo */}
-            <Link
-              to="/"
-              className="flex items-center gap-3 group"
-              aria-label={`${BRAND.name} — Home`}
-            >
-              <img 
-                src="/logo.png" 
-                alt={`${BRAND.name} Logo`} 
-                className="h-14 md:h-16 w-auto object-contain transition-transform duration-200 group-hover:scale-110 drop-shadow-sm" 
-              />
-              <span className={`font-display font-extrabold text-2xl md:text-3xl tracking-tight ${
-                isScrolled ? 'text-brand-navy' : 'text-white'
-              }`}>
-                {BRAND.name}
-              </span>
-            </Link>
-
-            {/* Desktop Nav Links */}
-            <div className="hidden lg:flex items-center gap-0.5" ref={dropdownRef}>
+          <div className="flex items-center justify-between h-20 md:h-24 gap-4">
+            {/* Left: Desktop Nav Links with LineHoverLink */}
+            <div className="hidden lg:flex items-center gap-6" ref={dropdownRef}>
               {NAV_LINKS.map((link) => (
                 <div 
                   key={link.label} 
-                  className="relative group"
+                  className="relative group py-2"
                   onMouseEnter={() => setActiveDropdown(link.label)}
                   onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  <Link
+                  <LineHoverLink
                     to={link.href}
-                    className={`flex items-center gap-1 px-3.5 py-2 rounded-lg text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 ${
-                      isScrolled
-                        ? 'text-brand-text-secondary hover:text-brand-teal hover:bg-brand-teal-light/50'
-                        : 'text-white/70 hover:text-white hover:bg-white/10'
-                    } ${activeDropdown === link.label ? (isScrolled ? 'text-brand-teal bg-brand-teal-light/50' : 'text-white bg-white/10') : ''}`}
-                    aria-expanded={activeDropdown === link.label}
-                    aria-haspopup={link.children ? 'true' : undefined}
+                    variant="slide"
+                    className={`flex items-center gap-1 text-sm font-semibold transition-colors duration-200 ${
+                      isScrolled ? 'text-brand-navy hover:text-brand-teal' : 'text-white/90 hover:text-white'
+                    }`}
                   >
-                    {link.label}
+                    <span>{link.label}</span>
                     {link.children && (
                       <ChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                        className={`w-3.5 h-3.5 ml-0.5 inline transition-transform duration-200 ${
                           activeDropdown === link.label ? 'rotate-180' : ''
                         }`}
                         aria-hidden="true"
                       />
                     )}
-                  </Link>
+                  </LineHoverLink>
 
                   {/* Dropdown Menu */}
                   <AnimatePresence>
@@ -106,14 +87,14 @@ const Navbar = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 mt-1 w-60 bg-white rounded-xl shadow-elevated border border-gray-100 overflow-hidden"
+                        className="absolute top-full left-0 mt-1 w-60 bg-white rounded-xl shadow-elevated border border-gray-100 overflow-hidden z-50"
                       >
                         <div className="p-1.5">
                           {link.children.map((child) => (
                             <Link
                               key={child.href}
                               to={child.href}
-                              className="block px-3.5 py-2.5 rounded-lg text-sm text-brand-text-secondary hover:bg-brand-teal-light/50 hover:text-brand-teal transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-inset font-medium"
+                              className="block px-3.5 py-2.5 rounded-lg text-sm text-brand-text-secondary hover:bg-brand-teal-light/50 hover:text-brand-teal transition-colors duration-150 font-medium"
                             >
                               {child.label}
                             </Link>
@@ -126,16 +107,15 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* CTA + Mobile Toggle */}
+            {/* Center/Left: CTA + Mobile Toggle */}
             <div className="flex items-center gap-3">
-              <button
-                type="button"
+              <AnimatedButton
                 onClick={() => setBookingOpen(true)}
-                className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-brand-teal text-white text-sm font-semibold rounded-full hover:bg-brand-teal-hover transition-colors duration-200 shadow-sm hover:shadow-md focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2"
+                className="hidden md:inline-flex px-5 py-2.5 text-xs md:text-sm"
               >
-                <Phone className="w-4 h-4" aria-hidden="true" />
+                <Phone className="w-4 h-4 mr-1.5 inline" aria-hidden="true" />
                 Buy Insurance
-              </button>
+              </AnimatedButton>
 
               <button
                 type="button"
@@ -148,6 +128,24 @@ const Navbar = () => {
                 <Menu className="w-6 h-6" />
               </button>
             </div>
+
+            {/* Extreme Right: Logo + Brand Name */}
+            <Link
+              to="/"
+              className="flex items-center gap-3 group ml-auto"
+              aria-label={`${BRAND.name} — Home`}
+            >
+              <span className={`font-display font-extrabold text-2xl md:text-3xl tracking-tight ${
+                isScrolled ? 'text-brand-navy' : 'text-white'
+              }`}>
+                {BRAND.name}
+              </span>
+              <img 
+                src="/logo.png" 
+                alt={`${BRAND.name} Logo`} 
+                className="h-14 md:h-16 w-auto object-contain transition-transform duration-200 group-hover:scale-110 drop-shadow-sm" 
+              />
+            </Link>
           </div>
         </div>
       </nav>

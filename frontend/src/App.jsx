@@ -3,7 +3,6 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import WhatsAppButton from './components/consultation/WhatsAppButton';
 import Home from './pages/Home';
 import HealthIndex from './pages/HealthInsurance/index';
 import HealthBasics from './pages/HealthInsurance/Basics';
@@ -80,7 +79,6 @@ function App() {
       </main>
       <MobileBottomBar />
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 }

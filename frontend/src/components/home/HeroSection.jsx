@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, ArrowRight, Star, ShieldCheck, BadgeCheck, TrendingUp } from 'lucide-react';
 import BookingModal from '../consultation/BookingModal';
-import { TwistingRibbon } from '@/components/ui/twisting-ribbon';
+import AnimatedRays from '@/components/ui/animated-rays';
+import AnimatedButton from '@/components/ui/animated-button';
 
 const HeroSection = () => {
   const [bookingOpen, setBookingOpen] = useState(false);
@@ -13,14 +14,9 @@ const HeroSection = () => {
         {/* Subtle dot grid overlay */}
         <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
 
-        {/* Twisting Ribbon Animated Background */}
-        <div className="absolute inset-0 z-0 opacity-70 pointer-events-none overflow-hidden" aria-hidden="true">
-          <TwistingRibbon
-            segments={400}
-            waveSpeed={0.018}
-            waveAmplitude={1}
-            twistCycles={6}
-          />
+        {/* Animated Rays Background */}
+        <div className="absolute inset-0 z-0 opacity-80 pointer-events-none overflow-hidden" aria-hidden="true">
+          <AnimatedRays />
         </div>
 
         {/* Floating geometric shapes */}
@@ -39,30 +35,29 @@ const HeroSection = () => {
               className="lg:col-span-7 max-w-2xl"
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-brand-teal text-sm font-semibold mb-8 backdrop-blur-sm">
-                <BadgeCheck className="w-4 h-4 text-brand-amber" aria-hidden="true" />
-                <span className="text-white/80">India’s Only 100% Unbiased Platform</span>
+                <BadgeCheck className="w-4 h-4" aria-hidden="true" />
+                <span>India&rsquo;s Only 100% Unbiased Platform</span>
               </div>
 
-              <h1 className="font-display text-hero-sm md:text-hero text-white mb-6">
-                Find the{' '}
-                <span className="text-gradient-warm">Right Insurance</span>.
-                <br />
-                Not the Highest Commission.
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-extrabold text-white tracking-tight leading-[1.1] mb-6">
+                Find the Right Insurance.<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal via-brand-teal-light to-brand-amber">
+                  Not the Highest Commission.
+                </span>
               </h1>
 
               <p className="text-white/60 text-lg md:text-xl mb-10 leading-relaxed max-w-xl font-body">
                 We compare 150+ health and term plans using a transparent rating methodology. No spam calls. No hidden fees. Just expert advice.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <button
-                  type="button"
+              <div className="flex flex-col sm:flex-row gap-4 mb-12 items-start sm:items-center">
+                <AnimatedButton
                   onClick={() => setBookingOpen(true)}
-                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-brand-teal text-white font-bold rounded-xl hover:bg-brand-teal-hover transition-colors duration-200 shadow-lg shadow-brand-teal/20 focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
+                  className="w-full sm:w-auto text-base py-4 px-8"
                 >
-                  <Phone className="w-5 h-5" aria-hidden="true" />
+                  <Phone className="w-5 h-5 mr-1 inline" aria-hidden="true" />
                   Book Free Consultation
-                </button>
+                </AnimatedButton>
                 <a
                   href="/health-insurance/plans"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/20 text-white font-semibold rounded-xl hover:bg-white/5 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white/50"
