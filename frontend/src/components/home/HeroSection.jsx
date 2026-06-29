@@ -11,7 +11,7 @@ const HeroSection = () => {
 
   return (
     <>
-      <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden hero-mesh min-h-[85vh] flex items-center">
+      <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden hero-mesh min-h-[100dvh] flex items-center">
         {/* Subtle dot grid overlay */}
         <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
 
