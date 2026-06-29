@@ -18,6 +18,7 @@ const ComparisonBanner = () => {
           eyebrow="Why Choose Us"
           title="The Unbiased Difference"
           subtitle="See how we stack up against traditional agents and commission-driven platforms."
+          theme="dark"
           className="text-white"
         />
 
@@ -44,13 +45,9 @@ const ComparisonBanner = () => {
               </thead>
               <tbody>
                 {COMPARISON_DATA.map((row, index) => (
-                  <motion.tr
+                  <tr
                     key={index}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.08 }}
-                    className="group hover:bg-white/[0.02] transition-colors duration-200"
+                    className="group hover:bg-white/[0.05] transition-colors duration-200"
                   >
                     <td className="p-6 text-white/60 font-medium text-sm border-b border-white/5">{row.feature}</td>
                     <td className="p-6 border-b border-white/5 relative">
@@ -70,7 +67,7 @@ const ComparisonBanner = () => {
                         <span className="text-sm">{row.them}</span>
                       </div>
                     </td>
-                  </motion.tr>
+                  </tr>
                 ))}
               </tbody>
             </table>
