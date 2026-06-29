@@ -1,0 +1,170 @@
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Phone, ArrowRight, Star, ShieldCheck, BadgeCheck, TrendingUp } from 'lucide-react';
+import BookingModal from '../consultation/BookingModal';
+
+const HeroSection = () => {
+  const [bookingOpen, setBookingOpen] = useState(false);
+
+  return (
+    <>
+      <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden hero-mesh min-h-[85vh] flex items-center">
+        {/* Subtle dot grid overlay */}
+        <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
+
+        {/* Floating geometric shapes */}
+        <div className="absolute top-20 right-[15%] w-64 h-64 rounded-full border border-white/5 animate-float" aria-hidden="true" />
+        <div className="absolute bottom-32 left-[10%] w-40 h-40 rounded-full border border-brand-teal/10 animate-float" style={{ animationDelay: '2s' }} aria-hidden="true" />
+        <div className="absolute top-1/3 right-[8%] w-3 h-3 rounded-full bg-brand-amber/30" aria-hidden="true" />
+        <div className="absolute top-2/3 left-[20%] w-2 h-2 rounded-full bg-brand-teal/30" aria-hidden="true" />
+
+        <div className="max-w-container mx-auto px-4 md:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            {/* Left Content — spans 7 columns */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-7 max-w-2xl"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-brand-teal text-sm font-semibold mb-8 backdrop-blur-sm">
+                <BadgeCheck className="w-4 h-4 text-brand-amber" aria-hidden="true" />
+                <span className="text-white/80">India’s Only 100% Unbiased Platform</span>
+              </div>
+
+              <h1 className="font-display text-hero-sm md:text-hero text-white mb-6">
+                Find the{' '}
+                <span className="text-gradient-warm">Right Insurance</span>.
+                <br />
+                Not the Highest Commission.
+              </h1>
+
+              <p className="text-white/60 text-lg md:text-xl mb-10 leading-relaxed max-w-xl font-body">
+                We compare 150+ health and term plans using a transparent rating methodology. No spam calls. No hidden fees. Just expert advice.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                <button
+                  type="button"
+                  onClick={() => setBookingOpen(true)}
+                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-brand-teal text-white font-bold rounded-xl hover:bg-brand-teal-hover transition-colors duration-200 shadow-lg shadow-brand-teal/20 focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
+                >
+                  <Phone className="w-5 h-5" aria-hidden="true" />
+                  Book Free Consultation
+                </button>
+                <a
+                  href="/health-insurance/plans"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/20 text-white font-semibold rounded-xl hover:bg-white/5 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white/50"
+                >
+                  Compare Plans
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </a>
+              </div>
+
+              {/* Trust badges strip */}
+              <div className="flex flex-wrap items-center gap-3">
+                <div className="stat-pill !bg-white/5 !border-white/10 !text-white/80">
+                  <Star className="w-3.5 h-3.5 text-brand-amber fill-brand-amber" aria-hidden="true" />
+                  <span className="font-data">4.7</span>
+                  <span className="text-white/50 text-xs font-body">Google</span>
+                </div>
+                <div className="stat-pill !bg-white/5 !border-white/10 !text-white/80">
+                  <ShieldCheck className="w-3.5 h-3.5 text-brand-teal" aria-hidden="true" />
+                  <span className="text-xs font-body">Zero Commission</span>
+                </div>
+                <div className="stat-pill !bg-white/5 !border-white/10 !text-white/80">
+                  <TrendingUp className="w-3.5 h-3.5 text-brand-green" aria-hidden="true" />
+                  <span className="font-data">10k+</span>
+                  <span className="text-white/50 text-xs font-body">Families</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right Content — Live Plan Preview Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5 hidden lg:block"
+            >
+              <div className="relative">
+                {/* Main preview card */}
+                <div className="glow-border animate-glow-pulse">
+                  <div className="bg-white/[0.03] backdrop-blur-xl rounded-2xl border border-white/10 p-8 relative overflow-hidden">
+                    {/* Shimmer overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent animate-shimmer" style={{ backgroundSize: '200% 100%' }} aria-hidden="true" />
+
+                    <div className="relative z-10">
+                      <div className="text-label uppercase tracking-widest text-brand-teal mb-6 font-data">
+                        Top Pick — 2026
+                      </div>
+
+                      <div className="flex items-center justify-between mb-6">
+                        <div>
+                          <h3 className="font-display font-bold text-xl text-white mb-1">
+                            HDFC Ergo Optima Secure+
+                          </h3>
+                          <p className="text-white/40 text-sm">Health Insurance</p>
+                        </div>
+                        <div className="w-14 h-14 rounded-2xl bg-brand-teal/10 border border-brand-teal/20 flex items-center justify-center">
+                          <span className="font-data font-bold text-xl text-brand-teal">4.6</span>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4 mb-6">
+                        <div className="bg-white/[0.03] rounded-xl p-3 border border-white/5">
+                          <p className="text-white/40 text-xs mb-1 font-body">Starting Premium</p>
+                          <p className="font-data font-bold text-white text-lg">₹13,459<span className="text-white/40 text-xs font-body">/yr</span></p>
+                        </div>
+                        <div className="bg-white/[0.03] rounded-xl p-3 border border-white/5">
+                          <p className="text-white/40 text-xs mb-1 font-body">Claim Settlement</p>
+                          <p className="font-data font-bold text-white text-lg">98.5%</p>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {['No Sub-Limits', 'Unlimited Restore', '10,000+ Hospitals'].map((tag) => (
+                          <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-brand-teal/10 text-brand-teal border border-brand-teal/15">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setBookingOpen(true)}
+                        className="w-full py-3 bg-brand-teal/10 text-brand-teal font-semibold rounded-xl border border-brand-teal/20 hover:bg-brand-teal/20 transition-colors duration-200 text-sm"
+                      >
+                        Get Expert Advice →
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating mini-card */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20, y: 10 }}
+                  animate={{ opacity: 1, x: 0, y: 0 }}
+                  transition={{ delay: 1, duration: 0.5 }}
+                  className="absolute -bottom-6 -left-8 bg-white px-5 py-3.5 rounded-xl shadow-dramatic border border-gray-100 flex items-center gap-3"
+                >
+                  <div className="w-10 h-10 bg-brand-teal-light rounded-full flex items-center justify-center">
+                    <ShieldCheck className="w-5 h-5 text-brand-teal" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-brand-text-secondary">Claims Support</p>
+                    <p className="text-brand-navy font-bold font-display text-sm">Lifelong Free</p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} source="hero" />
+    </>
+  );
+};
+
+export default HeroSection;
