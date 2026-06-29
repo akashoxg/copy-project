@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { renderHook, act } from '@testing-library/react-hooks';
 
 // Mock components for testing
 const MockSkeleton = ({ variant = 'rect', className = '' }) => (
