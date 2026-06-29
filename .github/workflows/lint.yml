@@ -20,20 +20,25 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./frontend
 
       # Frontend checks
       - name: Check frontend formatting
-        run: |
-          cd frontend
-          npm ci
-          npx oxlint --output-format stylish || true
+        run: npx oxlint --output-format stylish || true
+        working-directory: ./frontend
+
+      - name: Install backend dependencies
+        run: npm ci
+        working-directory: ./backend
 
       # Backend checks
       - name: Check backend syntax
-        run: |
-          cd backend
-          npm ci
-          node --check server.js 2>&1 || echo "Syntax check completed"
+        run: node --check server.js
+        working-directory: ./backend
 
   security-audit:
     name: Security Audit
@@ -43,13 +48,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run npm audit (Frontend)
-        run: |
-          cd frontend
-          npm ci
-          npm audit --audit-level=high || true
+        run: npm audit --audit-level=high || true
+        working-directory: ./frontend
 
       - name: Run npm audit (Backend)
-        run: |
-          cd backend
-          npm ci
-          npm audit --audit-level=high || true
+        run: npm audit --audit-level=high || true
+        working-directory: ./backend
