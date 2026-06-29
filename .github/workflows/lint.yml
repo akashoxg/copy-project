@@ -22,14 +22,15 @@ jobs:
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: npm ci
         working-directory: ./frontend
 
-      # Frontend checks
+      # Frontend checks - allow failures
       - name: Check frontend formatting
-        run: npx oxlint --output-format stylish || true
+        run: npx oxlint --output-format stylish || echo "Linting completed with warnings"
         working-directory: ./frontend
+        continue-on-error: true
 
       - name: Install backend dependencies
         run: npm ci
@@ -47,10 +48,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Run npm audit (Frontend)
-        run: npm audit --audit-level=high || true
+        run: npm audit --audit-level=high || echo "Audit completed"
         working-directory: ./frontend
 
       - name: Run npm audit (Backend)
-        run: npm audit --audit-level=high || true
+        run: npm audit --audit-level=high || echo "Audit completed"
         working-directory: ./backend
