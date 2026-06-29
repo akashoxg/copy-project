@@ -22,6 +22,8 @@ import MotorBenefits from './pages/MotorInsurance/BenefitsFeatures';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import Experts from './pages/Experts';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 import NotFound from './pages/NotFound';
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -73,6 +75,8 @@ function App() {
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/experts" element={<Experts />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>

@@ -36,8 +36,8 @@ const footerSections = [
       { label: 'About Us', href: '/about' },
       { label: 'Contact Us', href: '/contact-us' },
       { label: 'Book Consultation', href: '/contact-us' },
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms of Service', href: '#' },
+      { label: 'Privacy Policy', href: '/privacy-policy' },
+      { label: 'Terms of Service', href: '/terms-of-service' },
     ],
   },
 ];

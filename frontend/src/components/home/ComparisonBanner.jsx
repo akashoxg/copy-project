@@ -8,7 +8,7 @@ const ComparisonBanner = () => {
   const { ref, controls } = useScrollReveal();
 
   return (
-    <section className="py-20 md:py-28 bg-brand-navy text-white relative overflow-hidden">
+    <section className="py-16 md:py-24 lg:py-28 bg-brand-navy text-white relative overflow-hidden">
       {/* Background mesh */}
       <div className="absolute inset-0 bg-mesh-dark" aria-hidden="true" />
       <div className="absolute inset-0 dot-grid opacity-10" aria-hidden="true" />
@@ -27,18 +27,19 @@ const ComparisonBanner = () => {
           initial="hidden"
           animate={controls}
           variants={fadeInUp}
-          className="max-w-4xl mx-auto bg-brand-navy-light/50 backdrop-blur-sm rounded-2xl overflow-hidden shadow-dramatic border border-white/5"
+          className="max-w-5xl mx-auto bg-brand-navy-light/50 backdrop-blur-sm rounded-2xl overflow-hidden shadow-dramatic border border-white/5"
         >
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[600px]">
+          {/* Desktop Table View */}
+          <div className="hidden md:block">
+            <table className="w-full text-left border-collapse">
               <thead>
                 <tr>
-                  <th className="p-6 text-white/40 font-medium text-sm uppercase tracking-wider w-1/3 border-b border-white/5">Features</th>
-                  <th className="p-6 text-xl w-1/3 border-b border-brand-teal/20 relative">
+                  <th className="p-5 lg:p-6 text-white/40 font-medium text-xs lg:text-sm uppercase tracking-wider w-[35%]">Features</th>
+                  <th className="p-5 lg:p-6 text-base lg:text-xl w-[32%] border-b border-brand-teal/20 relative">
                     <div className="absolute inset-0 bg-brand-teal/5" aria-hidden="true" />
                     <span className="relative font-display font-bold text-brand-teal">{BRAND.name}</span>
                   </th>
-                  <th className="p-6 text-white/60 font-display font-bold text-xl w-1/3 border-b border-white/5">
+                  <th className="p-5 lg:p-6 text-white/60 font-display font-bold text-base lg:text-xl w-[32%]">
                     Others
                   </th>
                 </tr>
@@ -49,28 +50,66 @@ const ComparisonBanner = () => {
                     key={index}
                     className="group hover:bg-white/[0.05] transition-colors duration-200"
                   >
-                    <td className="p-6 text-white/60 font-medium text-sm border-b border-white/5">{row.feature}</td>
-                    <td className="p-6 border-b border-white/5 relative">
+                    <td className="p-5 lg:p-6 text-white/60 font-medium text-xs lg:text-sm border-b border-white/5">{row.feature}</td>
+                    <td className="p-5 lg:p-6 border-b border-white/5 relative">
                       <div className="absolute inset-0 bg-brand-teal/5" aria-hidden="true" />
-                      <div className="relative flex items-start gap-3">
-                        <div className="w-5 h-5 rounded-full bg-brand-teal/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <Check className="w-3 h-3 text-brand-teal" aria-hidden="true" />
+                      <div className="relative flex items-start gap-2 lg:gap-3">
+                        <div className="w-4 h-4 lg:w-5 lg:h-5 rounded-full bg-brand-teal/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Check className="w-2.5 h-2.5 lg:w-3 lg:h-3 text-brand-teal" aria-hidden="true" />
                         </div>
-                        <span className="text-white font-medium text-sm">{row.us}</span>
+                        <span className="text-white font-medium text-xs lg:text-sm leading-relaxed">{row.us}</span>
                       </div>
                     </td>
-                    <td className="p-6 text-white/40 border-b border-white/5">
-                      <div className="flex items-start gap-3">
-                        <div className="w-5 h-5 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <X className="w-3 h-3 text-white/30" aria-hidden="true" />
+                    <td className="p-5 lg:p-6 text-white/40 border-b border-white/5">
+                      <div className="flex items-start gap-2 lg:gap-3">
+                        <div className="w-4 h-4 lg:w-5 lg:h-5 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <X className="w-2.5 h-2.5 lg:w-3 lg:h-3 text-white/30" aria-hidden="true" />
                         </div>
-                        <span className="text-sm">{row.them}</span>
+                        <span className="text-xs lg:text-sm leading-relaxed">{row.them}</span>
                       </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="md:hidden">
+            <div className="grid grid-cols-1 gap-3 p-4">
+              {COMPARISON_DATA.map((row, index) => (
+                <div
+                  key={index}
+                  className="bg-white/[0.03] rounded-xl p-4 border border-white/5"
+                >
+                  <p className="text-white/50 text-xs font-medium mb-3 uppercase tracking-wide">{row.feature}</p>
+                  
+                  <div className="space-y-3">
+                    {/* Us */}
+                    <div className="flex items-start gap-2">
+                      <div className="w-5 h-5 rounded-full bg-brand-teal/20 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-3 h-3 text-brand-teal" aria-hidden="true" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-brand-teal font-bold text-xs mb-0.5">{BRAND.name}</p>
+                        <p className="text-white text-sm leading-snug">{row.us}</p>
+                      </div>
+                    </div>
+                    
+                    {/* Them */}
+                    <div className="flex items-start gap-2">
+                      <div className="w-5 h-5 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0">
+                        <X className="w-3 h-3 text-white/30" aria-hidden="true" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-white/40 font-bold text-xs mb-0.5">Others</p>
+                        <p className="text-white/40 text-sm leading-snug">{row.them}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
